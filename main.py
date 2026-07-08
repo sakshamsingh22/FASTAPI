@@ -1,28 +1,17 @@
-"""Minimal, interview-friendly FastAPI app."""
-
+#  DAY 1
 from fastapi import FastAPI
-from pydantic import BaseModel
+app = FastAPI()
+@app.get("/")
+def home():
+    return {"message": "Hello, World!"} 
+ 
 
-
-class HomeResponse(BaseModel):
-    """Structured response contract for the home endpoint."""
-
-    message: str
-    purpose: str
-
-
-app = FastAPI(
-    title="Interview Ready FastAPI",
-    description="A clean starter API that demonstrates good FastAPI basics.",
-    version="1.0.0",
-)
-
-
-@app.get("/", response_model=HomeResponse, tags=["General"])
-def home() -> HomeResponse:
-    """Return a welcome message and app purpose."""
-
-    return HomeResponse(
-        message="Hello, World!",
-        purpose="Template for clean and readable FastAPI interview projects",
-    )
+#about route
+@app.get("/about")
+def about():
+    return {"message": "This is the about page!"} 
+@app.get("/user")
+def user():
+    return {
+        "users": ["Alice", "Bob", "Charlie"]
+           }
